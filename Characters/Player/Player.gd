@@ -24,10 +24,17 @@ var velocity = Vector3()
 
 onready var camera = $Head/Camera
 
-export (PackedScene) var hud
+onready var pistol = $Head/Camera/Pistol
+onready var shotgun = $Head/Camera/Shotgun
+
+export var speed_swapping = 1
+
+var swapping = false
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	
+	shotgun.set_process(false)
 
 func _process(delta):
 	if Input.is_key_pressed(KEY_ESCAPE):
@@ -79,6 +86,23 @@ func _process(delta):
 		snap = Vector3(0, -1, 0)
 	
 	velocity = move_and_slide_with_snap(velocity, snap, floor_normal, stop_on_slope, max_slides, deg2rad(floor_max_angle))
+	
+	if not swapping:
+		if Input.is_action_pressed("weapon0") and pistol.available == true:
+			swapping = true
+			yield(get_tree().create_timer(speed_swapping), "timeout")
+			pistol.set_process(true)
+			print(pistol.name)
+			print(pistol.ammo)
+			swapping = false
+		if Input.is_action_pressed("weapon1"):
+			swapping = true
+			yield(get_tree().create_timer(speed_swapping), "timeout")
+			pistol.set_process(false)
+			shotgun.set_process(true)
+			print(shotgun.name)
+			print(shotgun.ammo)
+			swapping = false
 
 func _input(event):
 	if event is InputEventMouseMotion:

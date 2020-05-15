@@ -12,6 +12,8 @@ var firing = false
 
 onready var aim_location = $AimLocation
 
+export var available = false
+
 func _ready():
 	aim_location.cast_to = Vector3(0, 0, -firing_range)
 
