@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Weapons/Shotgun/Shotgun.gd" type="Script" id=1]
+
+[node name="Shotgun" type="Spatial"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="AimLocation" type="RayCast" parent="."]
+enabled = true
+cast_to = Vector3( 0, 0, 0 )
+collide_with_areas = true
+collide_with_bodies = false
