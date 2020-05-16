@@ -15,6 +15,8 @@ export var sensitivity = 0.1
 export var health = 100
 export var armor = 100
 
+export var speed_weapon_switch = 3
+
 var sprinting = false
 var jumping = false
 var crouching = false
@@ -24,17 +26,18 @@ var velocity = Vector3()
 
 onready var camera = $Head/Camera
 
+var current_weapon
+
 onready var pistol = $Head/Camera/Pistol
 onready var shotgun = $Head/Camera/Shotgun
-
-export var speed_swapping = 1
-
-var swapping = false
+onready var crossbow = $Head/Camera/Crossbow
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
+	current_weapon = pistol
 	shotgun.set_process(false)
+	crossbow.set_process(false)
 
 func _process(delta):
 	if Input.is_key_pressed(KEY_ESCAPE):
@@ -87,22 +90,21 @@ func _process(delta):
 	
 	velocity = move_and_slide_with_snap(velocity, snap, floor_normal, stop_on_slope, max_slides, deg2rad(floor_max_angle))
 	
-	if not swapping:
-		if Input.is_action_pressed("weapon0") and pistol.available == true:
-			swapping = true
-			yield(get_tree().create_timer(speed_swapping), "timeout")
-			pistol.set_process(true)
-			print(pistol.name)
-			print(pistol.ammo)
-			swapping = false
-		if Input.is_action_pressed("weapon1"):
-			swapping = true
-			yield(get_tree().create_timer(speed_swapping), "timeout")
-			pistol.set_process(false)
-			shotgun.set_process(true)
-			print(shotgun.name)
-			print(shotgun.ammo)
-			swapping = false
+	if Input.is_action_pressed("primary_fire"):
+		current_weapon.primary_fire()
+	
+	if Input.is_action_pressed("weapon0") and current_weapon != pistol:
+		current_weapon.unequip(speed_weapon_switch)
+		pistol.equip(speed_weapon_switch)
+		current_weapon = pistol
+	if Input.is_action_pressed("weapon1") and current_weapon != shotgun:
+		current_weapon.unequip(speed_weapon_switch)
+		shotgun.equip(speed_weapon_switch)
+		current_weapon = shotgun
+	if Input.is_action_pressed("weapon2") and current_weapon != crossbow:
+		current_weapon.unequip(speed_weapon_switch)
+		crossbow.equip(speed_weapon_switch)
+		current_weapon = crossbow
 
 func _input(event):
 	if event is InputEventMouseMotion:

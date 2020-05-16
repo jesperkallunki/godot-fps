@@ -7,6 +7,8 @@ export var ammo = 100
 export var max_ammo = 100
 
 var firing = false
+var equipping = false
+var unequipping = false
 
 onready var aim_location = $AimLocation
 
@@ -17,10 +19,26 @@ func _ready():
 
 func _process(_delta):
 	aim_location.force_raycast_update()
-	
-	if Input.is_action_pressed("primary_fire") and not firing and ammo > 0:
+
+func primary_fire():
+	if not (firing or equipping or unequipping) and ammo > 0:
+		print("TSUP")
 		self.add_child(projectile.instance())
 		ammo -= 1
 		firing = true
 		yield(get_tree().create_timer(firing_rate), "timeout")
 		firing = false
+
+func equip(speed):
+	if not (firing or equipping or unequipping):
+		equipping = true
+		yield(get_tree().create_timer(speed), "timeout")
+		self.set_process(true)
+		equipping = false
+
+func unequip(speed):
+	if not (firing or equipping or unequipping):
+		unequipping = true
+		yield(get_tree().create_timer(speed), "timeout")
+		self.set_process(false)
+		unequipping = false

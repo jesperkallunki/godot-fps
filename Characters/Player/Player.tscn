@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Characters/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://UI/HUD/HUD.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Weapons/Crossbow/Crossbow.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Weapons/Pistol/Pistol.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Weapons/Shotgun/Shotgun.tscn" type="PackedScene" id=5]
 
@@ -49,8 +50,11 @@ fov = 90.0
 [node name="HUD" parent="Head/Camera" instance=ExtResource( 2 )]
 
 [node name="Pistol" parent="Head/Camera" instance=ExtResource( 4 )]
+available = true
 
 [node name="Shotgun" parent="Head/Camera" instance=ExtResource( 5 )]
+
+[node name="Crossbow" parent="Head/Camera" instance=ExtResource( 3 )]
 
 [node name="Hitbox" type="CollisionShape" parent="Head"]
 shape = SubResource( 4 )
