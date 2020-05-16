@@ -22,7 +22,6 @@ func _process(_delta):
 
 func primary_fire():
 	if not (firing or equipping or unequipping) and ammo > 0:
-		print("PUM")
 		ammo -= 1
 		check_collision()
 		firing = true

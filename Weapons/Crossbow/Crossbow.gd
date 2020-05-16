@@ -22,7 +22,6 @@ func _process(_delta):
 
 func primary_fire():
 	if not (firing or equipping or unequipping) and ammo > 0:
-		print("TSUP")
 		self.add_child(projectile.instance())
 		ammo -= 1
 		firing = true

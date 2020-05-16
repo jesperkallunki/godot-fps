@@ -1,6 +1,6 @@
 extends RigidBody
 
-export var damage = 50
+export var damage = 100
 export var speed = 10
 
 func _ready():

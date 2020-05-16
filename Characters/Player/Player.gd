@@ -12,10 +12,13 @@ export var floor_max_angle = 47
 export var stop_on_slope = true
 export var max_slides = 4
 export var sensitivity = 0.1
-export var health = 100
-export var armor = 100
 
-export var speed_weapon_switch = 3
+export var health = 100
+export var max_health = 100
+export var armor = 50
+export var max_armor = 100
+
+export var speed_weapon_switch = 1
 
 var sprinting = false
 var jumping = false
@@ -93,15 +96,15 @@ func _process(delta):
 	if Input.is_action_pressed("primary_fire"):
 		current_weapon.primary_fire()
 	
-	if Input.is_action_pressed("weapon0") and current_weapon != pistol:
+	if Input.is_action_pressed("weapon0") and current_weapon != pistol and pistol.available == true:
 		current_weapon.unequip(speed_weapon_switch)
 		pistol.equip(speed_weapon_switch)
 		current_weapon = pistol
-	if Input.is_action_pressed("weapon1") and current_weapon != shotgun:
+	if Input.is_action_pressed("weapon1") and current_weapon != shotgun and shotgun.available == true:
 		current_weapon.unequip(speed_weapon_switch)
 		shotgun.equip(speed_weapon_switch)
 		current_weapon = shotgun
-	if Input.is_action_pressed("weapon2") and current_weapon != crossbow:
+	if Input.is_action_pressed("weapon2") and current_weapon != crossbow and crossbow.available == true:
 		current_weapon.unequip(speed_weapon_switch)
 		crossbow.equip(speed_weapon_switch)
 		current_weapon = crossbow

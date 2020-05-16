@@ -24,7 +24,6 @@ func _process(_delta):
 
 func primary_fire():
 	if not (firing or equipping or unequipping) and ammo > 0:
-		print("SUURPUM")
 		for i in pellets:
 			aim_location.rotation_degrees = Vector3(rand_range(-spread, spread), rand_range(-spread, spread), 0)
 			check_collision()
