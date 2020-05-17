@@ -36,7 +36,9 @@ func primary_fire():
 func check_collision():
 	if aim_location.is_colliding():
 		var area = aim_location.get_collider()
-		area.get_parent().health -= damage
+		var parent = area.get_parent()
+		if parent.is_in_group("Target"):
+			parent.health -= damage
 
 func equip(speed):
 	if not (firing or equipping or unequipping):

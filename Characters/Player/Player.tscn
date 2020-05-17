@@ -59,7 +59,6 @@ available = true
 [node name="Shotgun" parent="Head/Camera" instance=ExtResource( 5 )]
 
 [node name="Crossbow" parent="Head/Camera" instance=ExtResource( 3 )]
-available = true
 
 [node name="Collision" type="CollisionShape" parent="Head"]
 shape = SubResource( 4 )

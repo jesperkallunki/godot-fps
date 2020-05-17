@@ -35,6 +35,8 @@ onready var pistol = $Head/Camera/Pistol
 onready var shotgun = $Head/Camera/Shotgun
 onready var crossbow = $Head/Camera/Crossbow
 
+onready var hud = $Head/Camera/HUD
+
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
@@ -108,6 +110,8 @@ func _process(delta):
 		current_weapon.unequip(speed_weapon_switch)
 		crossbow.equip(speed_weapon_switch)
 		current_weapon = crossbow
+	
+	update_hud()
 
 func _input(event):
 	if event is InputEventMouseMotion:
@@ -115,3 +119,7 @@ func _input(event):
 		camera.rotation.x += -deg2rad(mouse_position.y * sensitivity)
 		camera.rotation.x = clamp(camera.rotation.x, deg2rad(-90), deg2rad(90))
 		rotation.y += -deg2rad(mouse_position.x * sensitivity)
+
+func update_hud():
+	hud.update_health(health)
+	hud.update_armor(armor)

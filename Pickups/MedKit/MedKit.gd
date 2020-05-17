@@ -1,8 +1,9 @@
 extends Area
 
-export var heal = 50
+export var health = 50
 
 func _on_MedKit_area_entered(area):
-	if area.is_in_group("Player") and area.get_parent().health < area.get_parent().max_health:
-		area.get_parent().health = clamp(area.get_parent().health + heal, 0, area.get_parent().max_health)
+	var parent = area.get_parent()
+	if parent.is_in_group("Player") and parent.health < parent.max_health:
+		parent.health = clamp(parent.health + health, 0, parent.max_health)
 		queue_free()

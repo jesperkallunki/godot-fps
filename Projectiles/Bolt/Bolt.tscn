@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Projectiles/Bolt/Bolt.gd" type="Script" id=1]
 
-[sub_resource type="CapsuleShape" id=3]
+[sub_resource type="CapsuleShape" id=1]
 radius = 0.1
 height = 0.3
 
@@ -14,13 +14,14 @@ collision_layer = 0
 collision_mask = 0
 gravity_scale = 0.0
 script = ExtResource( 1 )
-damage = 100
 speed = 100
 
 [node name="Collision" type="CollisionShape" parent="."]
-shape = SubResource( 3 )
+shape = SubResource( 1 )
 
 [node name="Impact" type="Area" parent="."]
 
-[node name="Hitbox" type="CollisionShape" parent="Impact"]
+[node name="Collision" type="CollisionShape" parent="Impact"]
 shape = SubResource( 2 )
+[connection signal="area_entered" from="Impact" to="." method="_on_Impact_area_entered"]
+[connection signal="body_entered" from="Impact" to="." method="_on_Impact_body_entered"]

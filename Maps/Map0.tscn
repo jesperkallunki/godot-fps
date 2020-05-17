@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Characters/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Characters/Enemy/Enemy.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Pickups/MedKit/MedKit.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Pickups/Shotgun/Shotgun.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Pickups/Crossbow/Crossbow.tscn" type="PackedScene" id=5]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 50, 0.001, 50 )
@@ -29,3 +31,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -15 )
 
 [node name="MedKit" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -5 )
+
+[node name="Shotgun" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -7 )
+
+[node name="Crossbow" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 5 )
