@@ -32,7 +32,7 @@ func check_collision():
 	if aim_location.is_colliding():
 		var area = aim_location.get_collider()
 		var parent = area.get_parent()
-		if parent.is_in_group("Target"):
+		if parent.is_in_group("Enemy"):
 			parent.health -= damage
 
 func equip(speed):

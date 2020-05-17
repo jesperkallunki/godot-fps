@@ -6,7 +6,9 @@
 
 [sub_resource type="BoxShape" id=2]
 
-[node name="KinematicBody" type="KinematicBody"]
+[node name="KinematicBody" type="KinematicBody" groups=[
+"Enemy",
+]]
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
@@ -15,9 +17,7 @@ __meta__ = {
 [node name="1" type="CollisionShape" parent="."]
 shape = SubResource( 1 )
 
-[node name="Area" type="Area" parent="." groups=[
-"Enemy",
-]]
+[node name="Area" type="Area" parent="."]
 
 [node name="2" type="CollisionShape" parent="Area"]
 shape = SubResource( 2 )

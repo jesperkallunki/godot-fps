@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=2]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 1, 1, 0.001 )
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 1, 1, 0.001 )
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 0.001, 1, 1 )
+
+[sub_resource type="BoxShape" id=4]
+extents = Vector3( 0.001, 1, 1 )
+
+[sub_resource type="BoxShape" id=5]
+extents = Vector3( 1, 0.001, 1 )
+
+[sub_resource type="BoxShape" id=6]
+extents = Vector3( 1, 0.001, 1 )
+
+[node name="Skybox" type="StaticBody"]
+transform = Transform( 999999, 0, 0, 0, 999999, 0, 0, 0, 999999, 0, 0, 0 )
+
+[node name="Collision1" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
+shape = SubResource( 1 )
+
+[node name="Collision2" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1 )
+shape = SubResource( 2 )
+
+[node name="Collision4" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0 )
+shape = SubResource( 3 )
+
+[node name="Collision3" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0 )
+shape = SubResource( 4 )
+
+[node name="Collision6" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+shape = SubResource( 5 )
+
+[node name="Collision5" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+shape = SubResource( 6 )
