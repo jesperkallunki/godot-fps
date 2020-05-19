@@ -3,21 +3,24 @@
 [ext_resource path="res://Characters/Enemy/Enemy.gd" type="Script" id=1]
 
 [sub_resource type="BoxShape" id=1]
+extents = Vector3( 0.5, 1.5, 0.5 )
 
 [sub_resource type="BoxShape" id=2]
+extents = Vector3( 0.5, 1.5, 0.5 )
 
-[node name="KinematicBody" type="KinematicBody" groups=[
-"Enemy",
-]]
+[node name="Enemy" type="KinematicBody"]
+collision_layer = 2
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="1" type="CollisionShape" parent="."]
+[node name="Collision" type="CollisionShape" parent="."]
 shape = SubResource( 1 )
 
-[node name="Area" type="Area" parent="."]
+[node name="Body" type="Area" parent="." groups=[
+"Hitbox",
+]]
 
-[node name="2" type="CollisionShape" parent="Area"]
+[node name="Collision" type="CollisionShape" parent="Body"]
 shape = SubResource( 2 )

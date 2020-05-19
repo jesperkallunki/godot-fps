@@ -1,9 +1,8 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Characters/Player/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Characters/Enemy/Enemy.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Pickups/Armor/Armor.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Pickups/MedKit/MedKit.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Pickups/Shotgun/Shotgun.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Pickups/Crossbow/Crossbow.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Environment/Skybox/Skybox.tscn" type="PackedScene" id=6]
 
@@ -12,9 +11,16 @@ extents = Vector3( 50, 0.001, 50 )
 
 [sub_resource type="PlaneMesh" id=2]
 
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 50, 0.001, 50 )
+
 [node name="Map0" type="Spatial"]
 
+[node name="Skybox" parent="." instance=ExtResource( 6 )]
+
 [node name="StaticBody" type="StaticBody" parent="."]
+collision_layer = 1024
+collision_mask = 0
 
 [node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
 shape = SubResource( 1 )
@@ -24,22 +30,33 @@ transform = Transform( 50, 0, 0, 0, 1, 0, 0, 0, 50, 0, 0, 0 )
 mesh = SubResource( 2 )
 material/0 = null
 
+[node name="Area" type="Area" parent="StaticBody"]
+collision_layer = 1024
+collision_mask = 0
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody/Area"]
+shape = SubResource( 3 )
+
 [node name="Player" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 
-[node name="KinematicBody" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -15 )
-
 [node name="MedKit" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -5 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 1, 0 )
 
-[node name="Shotgun" parent="." instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -7 )
+[node name="MedKit2" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, 0 )
+
+[node name="MedKit3" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 1, 0 )
+
+[node name="Armor" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, -2 )
+
+[node name="Armor2" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 1, -2 )
+
+[node name="Armor3" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 1, -2 )
 
 [node name="Crossbow" parent="." instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 5 )
-
-[node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 6 )
-
-[node name="StaticBody2" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, -4 )
