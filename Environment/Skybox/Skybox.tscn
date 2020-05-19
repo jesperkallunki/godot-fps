@@ -37,6 +37,9 @@ extents = Vector3( 1, 0.001, 1 )
 transform = Transform( 999999, 0, 0, 0, 999999, 0, 0, 0, 999999, 0, 0, 0 )
 collision_layer = 1024
 collision_mask = 0
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="CollisionFacet1" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )

@@ -24,11 +24,12 @@ extents = Vector3( 0.5, 1.25, 0.5 )
 [node name="Player" type="KinematicBody" groups=[
 "Player",
 ]]
-collision_mask = 1027
+collision_mask = 1031
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
+armor = 0
 
 [node name="CollisionHead" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0 )
@@ -46,7 +47,7 @@ shape = SubResource( 3 )
 "Hitbox",
 ]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0 )
-collision_mask = 7
+collision_mask = 1031
 
 [node name="Camera" type="Camera" parent="Head"]
 transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0, 0 )
@@ -69,7 +70,7 @@ shape = SubResource( 4 )
 "Hitbox",
 ]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0 )
-collision_mask = 7
+collision_mask = 1031
 
 [node name="Collision" type="CollisionShape" parent="Body"]
 shape = SubResource( 5 )

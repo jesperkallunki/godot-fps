@@ -8,6 +8,9 @@ extents = Vector3( 0.25, 0.25, 0.25 )
 [node name="Crossbow" type="Area"]
 collision_layer = 4
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Collision" type="CollisionShape" parent="."]
 shape = SubResource( 1 )

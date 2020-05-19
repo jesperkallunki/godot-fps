@@ -1,7 +1,5 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://Sprites/armor.png" type="Texture" id=2]
-[ext_resource path="res://Sprites/health.png" type="Texture" id=4]
 [ext_resource path="res://UI/HUD/HUD.gd" type="Script" id=5]
 
 [node name="HUD" type="MarginContainer"]
@@ -23,45 +21,44 @@ margin_top = 20.0
 margin_right = 780.0
 margin_bottom = 580.0
 
-[node name="Container" type="HBoxContainer" parent="Container"]
-margin_top = 470.0
-margin_right = 240.0
+[node name="Player" type="HBoxContainer" parent="Container"]
+margin_top = 546.0
+margin_right = 20.0
 margin_bottom = 560.0
 size_flags_horizontal = 0
 size_flags_vertical = 8
 custom_constants/separation = 20
 
-[node name="Health" type="HBoxContainer" parent="Container/Container"]
-margin_right = 110.0
-margin_bottom = 90.0
+[node name="Health" type="HBoxContainer" parent="Container/Player"]
+margin_bottom = 14.0
 custom_constants/separation = 20
 
-[node name="Icon" type="TextureRect" parent="Container/Container/Health"]
-margin_right = 90.0
-margin_bottom = 90.0
-texture = ExtResource( 4 )
-
-[node name="Amount" type="Label" parent="Container/Container/Health"]
-margin_left = 110.0
-margin_top = 38.0
-margin_right = 110.0
-margin_bottom = 52.0
+[node name="Label" type="Label" parent="Container/Player/Health"]
+margin_bottom = 14.0
 uppercase = true
 
-[node name="Armor" type="HBoxContainer" parent="Container/Container"]
-margin_left = 130.0
-margin_right = 240.0
-margin_bottom = 90.0
+[node name="Armor" type="HBoxContainer" parent="Container/Player"]
+margin_left = 20.0
+margin_right = 20.0
+margin_bottom = 14.0
 custom_constants/separation = 20
 
-[node name="Icon" type="TextureRect" parent="Container/Container/Armor"]
-margin_right = 90.0
-margin_bottom = 90.0
-texture = ExtResource( 2 )
-
-[node name="Amount" type="Label" parent="Container/Container/Armor"]
-margin_left = 110.0
-margin_top = 38.0
-margin_right = 110.0
-margin_bottom = 52.0
+[node name="Label" type="Label" parent="Container/Player/Armor"]
+margin_bottom = 14.0
 uppercase = true
+
+[node name="Weapon" type="HBoxContainer" parent="Container"]
+margin_left = 760.0
+margin_top = 546.0
+margin_right = 760.0
+margin_bottom = 560.0
+size_flags_horizontal = 10
+size_flags_vertical = 8
+custom_constants/separation = 20
+
+[node name="Ammo" type="HBoxContainer" parent="Container/Weapon"]
+margin_bottom = 14.0
+custom_constants/separation = 20
+
+[node name="Label" type="Label" parent="Container/Weapon/Ammo"]
+margin_bottom = 14.0

@@ -123,3 +123,4 @@ func _input(event):
 func update_hud():
 	hud.update_health(health)
 	hud.update_armor(armor)
+	hud.update_ammo(current_weapon.ammo)
