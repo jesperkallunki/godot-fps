@@ -20,10 +20,9 @@ run/main_scene="res://Maps/Map0.tscn"
 
 [display]
 
-window/size/width=1920
-window/size/height=1080
+window/size/width=1270
+window/size/height=780
 window/size/borderless=true
-window/size/fullscreen=true
 
 [input]
 

@@ -23,7 +23,6 @@ export var speed_weapon_switch = 1
 var sprinting = false
 var jumping = false
 var crouching = false
-var falling = false
 
 var velocity = Vector3()
 
@@ -73,12 +72,8 @@ func _process(delta):
 			velocity.y = jumping_force
 			jumping = true
 	
-	falling = false
-	if velocity.y < 0:
-		falling = true
-	
 	crouching = false
-	if Input.is_action_pressed("crouch") and not (sprinting or jumping or falling):
+	if Input.is_action_pressed("crouch") and not (sprinting or jumping):
 		speed = speed_crouching
 		crouching = true
 	

@@ -24,6 +24,11 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
+speed_running = 10
+speed_sprinting = 15
+speed_crouching = 5
+jumping_force = 15
+acceleration = 10
 armor = 0
 
 [node name="CollisionBody" type="CollisionShape" parent="."]

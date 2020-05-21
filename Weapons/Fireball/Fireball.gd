@@ -3,6 +3,7 @@ extends Spatial
 export (PackedScene) var projectile
 
 export var firing_rate = 1
+export var spread = 4
 
 var firing = false
 
@@ -13,6 +14,7 @@ func _ready():
 	aim_location.cast_to = Vector3(0, 0, -999999999)
 
 func _process(_delta):
+	aim_location.rotation_degrees = Vector3(rand_range(-spread, spread), rand_range(-spread, spread), 0)
 	aim_location.force_raycast_update()
 	firing_location.look_at(aim_location.get_collision_point(), Vector3(0, 1, 0))
 
