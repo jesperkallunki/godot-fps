@@ -1,7 +1,7 @@
 extends RigidBody
 
-export var damage = 100
-export var speed = 100
+export var damage = 20
+export var speed = 10
 
 func _ready():
 	set_as_toplevel(true)

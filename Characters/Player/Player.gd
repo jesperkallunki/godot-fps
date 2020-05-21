@@ -27,15 +27,15 @@ var falling = false
 
 var velocity = Vector3()
 
-onready var camera = $Head/Camera
+onready var camera = $Camera
 
 var current_weapon
 
-onready var pistol = $Head/Camera/Pistol
-onready var shotgun = $Head/Camera/Shotgun
-onready var crossbow = $Head/Camera/Crossbow
+onready var pistol = $Camera/Pistol
+onready var shotgun = $Camera/Shotgun
+onready var crossbow = $Camera/Crossbow
 
-onready var hud = $Head/Camera/HUD
+onready var hud = $Camera/HUD
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -50,13 +50,13 @@ func _process(delta):
 	
 	var direction = Vector2();
 	if Input.is_action_pressed("forward"):
-		direction.y += 1
-	if Input.is_action_pressed("backward"):
 		direction.y -= 1
+	if Input.is_action_pressed("backward"):
+		direction.y += 1
 	if Input.is_action_pressed("left"):
-		direction.x += 1
-	if Input.is_action_pressed("right"):
 		direction.x -= 1
+	if Input.is_action_pressed("right"):
+		direction.x += 1
 	
 	direction = direction.normalized().rotated(-rotation.y)
 	
