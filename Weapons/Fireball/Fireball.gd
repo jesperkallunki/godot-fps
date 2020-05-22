@@ -2,7 +2,7 @@ extends Spatial
 
 export (PackedScene) var projectile
 
-export var firing_rate = 1
+export var firing_rate = 2
 export var spread = 4
 
 var firing = false

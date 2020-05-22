@@ -6,6 +6,7 @@
 [node name="Fireball" type="Spatial"]
 script = ExtResource( 1 )
 projectile = ExtResource( 2 )
+spread = 0
 
 [node name="AimLocation" type="RayCast" parent="."]
 enabled = true

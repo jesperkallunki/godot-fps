@@ -70,13 +70,16 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 1, -2 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, -4 )
 
 [node name="Enemy" parent="." instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 11 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 15 )
 
 [node name="Shotgun" parent="." instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 1, 0 )
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 2, 29 )
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 84, 0 )
+keep_aspect = 0
+current = true
+fov = 90.0
 
 [node name="StaticBody2" type="StaticBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 6 )
@@ -93,14 +96,41 @@ collision_mask = 0
 [node name="CollisionShape" type="CollisionShape" parent="StaticBody2/Area"]
 shape = SubResource( 5 )
 
+[node name="StaticBody3" type="StaticBody" parent="."]
+transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, -2, 0, -2 )
+collision_layer = 1024
+collision_mask = 0
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody3"]
+shape = SubResource( 4 )
+
+[node name="Area" type="Area" parent="StaticBody3"]
+collision_layer = 1024
+collision_mask = 0
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody3/Area"]
+shape = SubResource( 5 )
+
 [node name="Enemy2" parent="." instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 2, 0 )
+transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 43, 2, 0 )
 
 [node name="Enemy3" parent="." instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 3, 0 )
+transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 40, 3, 0 )
 
 [node name="Enemy4" parent="." instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2, 2 )
+transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 39, 2, 2 )
 
 [node name="Enemy5" parent="." instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2, 4 )
+transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 36, 2, 4 )
+
+[node name="Enemy9" parent="." instance=ExtResource( 4 )]
+transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 43, 2, -7 )
+
+[node name="Enemy8" parent="." instance=ExtResource( 4 )]
+transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 40, 3, -7 )
+
+[node name="Enemy7" parent="." instance=ExtResource( 4 )]
+transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 39, 2, -5 )
+
+[node name="Enemy6" parent="." instance=ExtResource( 4 )]
+transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 36, 2, -3 )

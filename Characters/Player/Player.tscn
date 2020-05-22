@@ -24,12 +24,6 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
-speed_running = 10
-speed_sprinting = 15
-speed_crouching = 5
-jumping_force = 15
-acceleration = 10
-armor = 0
 
 [node name="CollisionBody" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
@@ -50,8 +44,10 @@ fov = 90.0
 available = true
 
 [node name="Shotgun" parent="Camera" instance=ExtResource( 5 )]
+visible = false
 
 [node name="Crossbow" parent="Camera" instance=ExtResource( 3 )]
+visible = false
 
 [node name="Hitbox" type="Area" parent="." groups=[
 "Hitbox",

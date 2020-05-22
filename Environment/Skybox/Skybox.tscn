@@ -12,19 +12,19 @@ extents = Vector3( 0.001, 1, 1 )
 [sub_resource type="BoxShape" id=4]
 extents = Vector3( 0.001, 1, 1 )
 
-[sub_resource type="BoxShape" id=6]
+[sub_resource type="BoxShape" id=5]
 extents = Vector3( 1, 0.001, 1 )
 
-[sub_resource type="BoxShape" id=5]
+[sub_resource type="BoxShape" id=6]
 extents = Vector3( 1, 0.001, 1 )
 
 [sub_resource type="BoxShape" id=7]
 extents = Vector3( 1, 1, 0.001 )
 
-[sub_resource type="BoxShape" id=9]
+[sub_resource type="BoxShape" id=8]
 extents = Vector3( 0.001, 1, 1 )
 
-[sub_resource type="BoxShape" id=8]
+[sub_resource type="BoxShape" id=9]
 extents = Vector3( 0.001, 1, 1 )
 
 [sub_resource type="BoxShape" id=10]
@@ -59,11 +59,11 @@ shape = SubResource( 4 )
 
 [node name="CollisionFacet5" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
-shape = SubResource( 6 )
+shape = SubResource( 5 )
 
 [node name="CollisionFacet6" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
-shape = SubResource( 5 )
+shape = SubResource( 6 )
 
 [node name="Facet1" type="Area" parent="."]
 collision_layer = 1024
@@ -89,7 +89,7 @@ collision_mask = 0
 
 [node name="Collision" type="CollisionShape" parent="Facet3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -2 )
-shape = SubResource( 9 )
+shape = SubResource( 8 )
 
 [node name="Facet4" type="Area" parent="."]
 collision_layer = 1024
@@ -97,7 +97,7 @@ collision_mask = 0
 
 [node name="Collision" type="CollisionShape" parent="Facet4"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0 )
-shape = SubResource( 8 )
+shape = SubResource( 9 )
 
 [node name="Facet5" type="Area" parent="."]
 collision_layer = 1024

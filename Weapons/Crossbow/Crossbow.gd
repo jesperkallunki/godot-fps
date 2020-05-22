@@ -34,12 +34,14 @@ func equip(speed):
 	if not (firing or equipping or unequipping):
 		equipping = true
 		yield(get_tree().create_timer(speed), "timeout")
-		self.set_process(true)
+		visible = true
+		set_process(true)
 		equipping = false
 
 func unequip(speed):
 	if not (firing or equipping or unequipping):
 		unequipping = true
 		yield(get_tree().create_timer(speed), "timeout")
-		self.set_process(false)
+		visible = false
+		set_process(false)
 		unequipping = false
