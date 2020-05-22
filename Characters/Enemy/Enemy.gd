@@ -18,6 +18,7 @@ export var max_slides = 4
 var velocity = Vector3()
 
 var jumping = false
+var awake = false
 
 onready var fov = $FOV
 onready var los = $FOV/LOS
@@ -25,21 +26,35 @@ onready var los = $FOV/LOS
 onready var weapon = $FOV/Fireball
 
 var target
+var target_translation
 
 func _ready():
 	los.cast_to = Vector3(0, 0, -999999999)
 
 func _process(delta):
 	var direction = Vector3()
-	
+
 	if target:
-		los.look_at_from_position(translation, target.translation, floor_normal)
+		target_translation = target.translation
+		los.look_at(target_translation, floor_normal)
 		los.force_raycast_update()
 		if los.is_colliding():
 			if los.get_collider().get_parent() == target:
-				fov.look_at_from_position(translation, target.translation, floor_normal)
-				direction = target.translation - translation
+				awake = true
+				fov.look_at(target_translation, floor_normal)
+				direction = target_translation - translation
 				weapon.primary_fire()
+			else:
+				fov.look_at(target_translation, floor_normal)
+				direction = velocity
+	elif awake and not is_on_wall():
+		fov.look_at(target_translation, floor_normal)
+		direction = velocity
+	else:
+		direction = -velocity
+	
+	if is_on_wall():
+		direction = -velocity
 	
 	direction = direction.normalized()
 	
