@@ -18,7 +18,7 @@ export var max_slides = 4
 var velocity = Vector3()
 
 var jumping = false
-var awake = false
+var fighting = false
 
 onready var fov = $FOV
 onready var los = $FOV/LOS
@@ -27,34 +27,48 @@ onready var weapon = $FOV/Fireball
 
 var target
 var target_translation
+var last_target_translation
+var direction = Vector3()
+var searching = false
 
 func _ready():
 	los.cast_to = Vector3(0, 0, -999999999)
 
 func _process(delta):
-	var direction = Vector3()
-
 	if target:
 		target_translation = target.translation
 		los.look_at(target_translation, floor_normal)
 		los.force_raycast_update()
 		if los.is_colliding():
 			if los.get_collider().get_parent() == target:
-				awake = true
 				fov.look_at(target_translation, floor_normal)
 				direction = target_translation - translation
+				last_target_translation = target_translation
+				fighting = true
 				weapon.primary_fire()
-			else:
-				fov.look_at(target_translation, floor_normal)
-				direction = velocity
-	elif awake and not is_on_wall():
-		fov.look_at(target_translation, floor_normal)
-		direction = velocity
-	else:
-		direction = -velocity
-	
-	if is_on_wall():
-		direction = -velocity
+			elif last_target_translation != null:
+				fov.look_at(last_target_translation, floor_normal)
+				direction = last_target_translation - translation
+				if translation.distance_to(last_target_translation) < 1:
+					last_target_translation = null
+			elif not (searching or is_on_wall()) and fighting:
+				direction = Vector3(rand_range(-999, 999), 0, rand_range(-999, 999)) - translation
+				fov.look_at(direction, floor_normal)
+				searching = true
+				yield(get_tree().create_timer(int(rand_range(1, 4))), "timeout")
+				searching = false
+	elif fighting:
+		if last_target_translation != null:
+			fov.look_at(last_target_translation, floor_normal)
+			direction = last_target_translation - translation
+			if translation.distance_to(last_target_translation) < 1:
+				last_target_translation = null
+		elif not searching or is_on_wall():
+			direction = Vector3(rand_range(-999, 999), 0, rand_range(-999, 999)) - translation
+			fov.look_at(direction, floor_normal)
+			searching = true
+			yield(get_tree().create_timer(int(rand_range(1, 4))), "timeout")
+			searching = false
 	
 	direction = direction.normalized()
 	
