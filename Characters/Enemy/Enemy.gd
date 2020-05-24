@@ -15,60 +15,36 @@ export var floor_max_angle = 47
 export var stop_on_slope = true
 export var max_slides = 4
 
+var direction = Vector3()
 var velocity = Vector3()
 
 var jumping = false
-var fighting = false
+var awake = false
+var attacking = false
+var chasing = false
+var searching = false
 
 onready var fov = $FOV
-onready var los = $FOV/LOS
-
 onready var weapon = $FOV/Fireball
 
 var target
-var target_translation
-var last_target_translation
-var direction = Vector3()
-var searching = false
 
 func _ready():
-	los.cast_to = Vector3(0, 0, -999999999)
+	pass
 
 func _process(delta):
+	
 	if target:
-		target_translation = target.translation
-		los.look_at(target_translation, floor_normal)
-		los.force_raycast_update()
-		if los.is_colliding():
-			if los.get_collider().get_parent() == target:
-				fov.look_at(target_translation, floor_normal)
-				direction = target_translation - translation
-				last_target_translation = target_translation
-				fighting = true
-				weapon.primary_fire()
-			elif last_target_translation != null:
-				fov.look_at(last_target_translation, floor_normal)
-				direction = last_target_translation - translation
-				if translation.distance_to(last_target_translation) < 1:
-					last_target_translation = null
-			elif not (searching or is_on_wall()) and fighting:
-				direction = Vector3(rand_range(-999, 999), 0, rand_range(-999, 999)) - translation
-				fov.look_at(direction, floor_normal)
-				searching = true
-				yield(get_tree().create_timer(int(rand_range(1, 4))), "timeout")
-				searching = false
-	elif fighting:
-		if last_target_translation != null:
-			fov.look_at(last_target_translation, floor_normal)
-			direction = last_target_translation - translation
-			if translation.distance_to(last_target_translation) < 1:
-				last_target_translation = null
-		elif not searching or is_on_wall():
-			direction = Vector3(rand_range(-999, 999), 0, rand_range(-999, 999)) - translation
-			fov.look_at(direction, floor_normal)
-			searching = true
-			yield(get_tree().create_timer(int(rand_range(1, 4))), "timeout")
-			searching = false
+		var space_state = get_world().direct_space_state
+		var intersect_ray = space_state.intersect_ray(global_transform.origin, target.global_transform.origin)
+		if intersect_ray.collider == target:
+			awake = true
+			chase()
+			attack()
+		elif awake:
+			search()
+	elif awake:
+		search()
 	
 	direction = direction.normalized()
 	
@@ -90,6 +66,28 @@ func _process(delta):
 	
 	if health <= 0:
 		queue_free()
+
+func attack():
+	if not attacking:
+		weapon.primary_fire()
+		attacking = true
+		yield(get_tree().create_timer(1), "timeout")
+		attacking = false
+
+func chase():
+	if not attacking:
+		direction = target.global_transform.origin - global_transform.origin
+		fov.look_at(target.global_transform.origin, floor_normal)
+
+func search():
+	if not searching or is_on_wall():
+		var random_direction = Vector3(rand_range(-999, 999), 0, rand_range(-999, 999))
+		direction = random_direction - global_transform.origin
+		fov.look_at(random_direction, floor_normal)
+		searching = true
+		var random_timer = rand_range(1, 3)
+		yield(get_tree().create_timer(random_timer), "timeout")
+		searching = false
 
 func _on_FOV_area_entered(area):
 	var parent = area.get_parent()

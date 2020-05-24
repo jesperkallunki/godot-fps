@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Characters/Enemy/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://Weapons/Fireball/Fireball.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Sprites/plöö.png" type="Texture" id=3]
 
 [sub_resource type="CapsuleShape" id=8]
 radius = 0.5
@@ -11,16 +10,10 @@ height = 2.0
 [sub_resource type="BoxShape" id=2]
 extents = Vector3( 0.5, 1.5, 0.5 )
 
-[sub_resource type="CubeMesh" id=7]
-size = Vector3( 0.5, 0.5, 2 )
+[sub_resource type="PrismMesh" id=9]
 
-[sub_resource type="QuadMesh" id=5]
-size = Vector2( 1, 3.5 )
-
-[sub_resource type="SpatialMaterial" id=6]
-flags_transparent = true
-params_billboard_mode = 2
-albedo_texture = ExtResource( 3 )
+[sub_resource type="SpatialMaterial" id=10]
+albedo_color = Color( 0.976471, 0.0156863, 0.0156863, 1 )
 
 [node name="Enemy" type="KinematicBody" groups=[
 "Enemy",
@@ -57,22 +50,11 @@ collision_mask = 1025
 transform = Transform( -1.62921e-07, 1, -4.88762e-07, 0, -1.62921e-07, -3, -1, -1.62921e-07, 7.96295e-14, 0, -1.25, 0 )
 polygon = PoolVector2Array( 0, 0, 50, 50, 50, -50 )
 
-[node name="LOS" type="RayCast" parent="FOV"]
-enabled = true
-cast_to = Vector3( 0, 0, 0 )
-collision_mask = 1025
-collide_with_areas = true
-collide_with_bodies = false
-
 [node name="Fireball" parent="FOV" instance=ExtResource( 2 )]
 
-[node name="MeshInstance2" type="MeshInstance" parent="FOV"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.267469, -1.25488 )
-mesh = SubResource( 7 )
-material/0 = null
-
-[node name="MeshInstance" type="MeshInstance" parent="."]
-mesh = SubResource( 5 )
-material/0 = SubResource( 6 )
+[node name="MeshInstance" type="MeshInstance" parent="FOV"]
+transform = Transform( -1.5, -1.16824e-06, 1.70218e-14, 0, -1.31134e-07, -1, 5.84122e-07, -3, 4.37114e-08, 0, 0, -1 )
+mesh = SubResource( 9 )
+material/0 = SubResource( 10 )
 [connection signal="area_entered" from="FOV" to="." method="_on_FOV_area_entered"]
 [connection signal="area_exited" from="FOV" to="." method="_on_FOV_area_exited"]

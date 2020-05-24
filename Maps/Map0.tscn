@@ -70,7 +70,13 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 1, -2 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, -4 )
 
 [node name="Enemy" parent="." instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 15 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 9, 15 )
+
+[node name="Enemy2" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 9, 17 )
+
+[node name="Enemy3" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 9, 17 )
 
 [node name="Shotgun" parent="." instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 1, 0 )
@@ -78,6 +84,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 1, 0 )
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 84, 0 )
 keep_aspect = 0
+current = true
 fov = 90.0
 
 [node name="StaticBody2" type="StaticBody" parent="."]
