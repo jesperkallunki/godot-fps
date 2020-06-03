@@ -24,7 +24,6 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
-health = 10
 acceleration = 5
 speed = 5
 

@@ -1,6 +1,7 @@
 extends KinematicBody
 
 export var health = 100
+export var max_health = 100
 export var armor = 0
 
 export var acceleration = 10
@@ -19,7 +20,6 @@ var direction = Vector3()
 var velocity = Vector3()
 
 var jumping = false
-var awake = false
 var attacking = false
 var chasing = false
 var searching = false
@@ -28,29 +28,30 @@ onready var fov = $FOV
 onready var weapon = $FOV/Fireball
 
 enum {
-	IDLE,
-	COMBAT,
-	SEARCHING
+	SLEEP,
+	FIGHT,
+	SEARCH
 }
+
+var state = SLEEP
 
 var target
 
-func _ready():
-	pass
-
 func _process(delta):
+	
+	match state:
+		SLEEP:
+			sleep()
+		FIGHT:
+			fight()
+		SEARCH:
+			search()
 	
 	if target:
 		var space_state = get_world().direct_space_state
 		var intersect_ray = space_state.intersect_ray(global_transform.origin, target.global_transform.origin)
 		if intersect_ray.collider == target:
-			awake = true
-			chase()
-			attack()
-		elif awake:
-			search()
-	elif awake:
-		search()
+			state = FIGHT
 	
 	direction = direction.normalized()
 	
@@ -74,17 +75,19 @@ func _process(delta):
 	if health <= 0:
 		queue_free()
 
-func attack():
-	if not attacking:
-		weapon.primary_fire()
-		attacking = true
-		yield(get_tree().create_timer(1), "timeout")
-		attacking = false
+func sleep():
+	if health < max_health:
+		state = SEARCH
 
-func chase():
-	if not attacking:
+func fight():
+	var space_state = get_world().direct_space_state
+	var intersect_ray = space_state.intersect_ray(global_transform.origin, target.global_transform.origin)
+	if intersect_ray.collider == target:
 		direction = target.global_transform.origin - global_transform.origin
 		fov.look_at(target.global_transform.origin, floor_normal)
+		weapon.primary_fire()
+	else:
+		state = SEARCH
 
 func search():
 	if not searching or is_on_wall():
@@ -100,6 +103,7 @@ func _on_FOV_area_entered(area):
 	var parent = area.get_parent()
 	if parent.is_in_group("Player"):
 		target = parent
+
 
 func _on_FOV_area_exited(area):
 	var parent = area.get_parent()
