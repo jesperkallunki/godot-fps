@@ -45,6 +45,26 @@ collision_mask = 0
 [node name="CollisionShape" type="CollisionShape" parent="StaticBody/Area"]
 shape = SubResource( 3 )
 
+[node name="StaticBody24" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 100 )
+collision_layer = 1024
+collision_mask = 0
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody24"]
+shape = SubResource( 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody24"]
+transform = Transform( 50, 0, 0, 0, 1, 0, 0, 0, 50, 0, 0, 0 )
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="Area" type="Area" parent="StaticBody24"]
+collision_layer = 1024
+collision_mask = 0
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody24/Area"]
+shape = SubResource( 3 )
+
 [node name="Player" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 2, 4 )
 
@@ -84,7 +104,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 1, 0 )
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 84, 0 )
 keep_aspect = 0
-current = true
 fov = 90.0
 
 [node name="StaticBody2" type="StaticBody" parent="."]
@@ -133,7 +152,7 @@ collision_mask = 0
 shape = SubResource( 5 )
 
 [node name="StaticBody11" type="StaticBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -27, 0, 19 )
+transform = Transform( 1, 0, 0, 0, 7.07107, -0.707107, 0, 7.07107, 0.707107, -27, 0, 19 )
 collision_layer = 1024
 collision_mask = 0
 
@@ -145,6 +164,21 @@ collision_layer = 1024
 collision_mask = 0
 
 [node name="CollisionShape" type="CollisionShape" parent="StaticBody11/Area"]
+shape = SubResource( 5 )
+
+[node name="StaticBody23" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 9.84808, -0.173648, 0, 1.73648, 0.984808, -27, 0, 33 )
+collision_layer = 1024
+collision_mask = 0
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody23"]
+shape = SubResource( 4 )
+
+[node name="Area" type="Area" parent="StaticBody23"]
+collision_layer = 1024
+collision_mask = 0
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody23/Area"]
 shape = SubResource( 5 )
 
 [node name="StaticBody9" type="StaticBody" parent="."]

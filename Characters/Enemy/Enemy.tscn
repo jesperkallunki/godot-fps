@@ -3,16 +3,16 @@
 [ext_resource path="res://Characters/Enemy/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://Weapons/Fireball/Fireball.tscn" type="PackedScene" id=2]
 
-[sub_resource type="CapsuleShape" id=8]
+[sub_resource type="CapsuleShape" id=1]
 radius = 0.5
 height = 2.0
 
 [sub_resource type="BoxShape" id=2]
 extents = Vector3( 0.5, 1.5, 0.5 )
 
-[sub_resource type="PrismMesh" id=9]
+[sub_resource type="PrismMesh" id=3]
 
-[sub_resource type="SpatialMaterial" id=10]
+[sub_resource type="SpatialMaterial" id=4]
 albedo_color = Color( 0.976471, 0.0156863, 0.0156863, 1 )
 
 [node name="Enemy" type="KinematicBody" groups=[
@@ -30,7 +30,7 @@ speed = 5
 
 [node name="Collision" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
-shape = SubResource( 8 )
+shape = SubResource( 1 )
 
 [node name="Hitbox" type="Area" parent="." groups=[
 "Hitbox",
@@ -54,7 +54,7 @@ polygon = PoolVector2Array( 0, 0, 50, 50, 50, -50 )
 
 [node name="MeshInstance" type="MeshInstance" parent="FOV"]
 transform = Transform( -1.5, -1.16824e-06, 1.70218e-14, 0, -1.31134e-07, -1, 5.84122e-07, -3, 4.37114e-08, 0, 0, -1 )
-mesh = SubResource( 9 )
-material/0 = SubResource( 10 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
 [connection signal="area_entered" from="FOV" to="." method="_on_FOV_area_entered"]
 [connection signal="area_exited" from="FOV" to="." method="_on_FOV_area_exited"]

@@ -10,7 +10,7 @@ export var jumping_force = 15
 
 export var gravity = 50
 export var max_gravity = 150
-export var floor_normal = Vector3(0, 1, 0)
+export var floor_normal = Vector3.UP
 export var floor_max_angle = 47
 export var stop_on_slope = true
 export var max_slides = 4
@@ -26,6 +26,12 @@ var searching = false
 
 onready var fov = $FOV
 onready var weapon = $FOV/Fireball
+
+enum {
+	IDLE,
+	COMBAT,
+	SEARCHING
+}
 
 var target
 
@@ -48,19 +54,20 @@ func _process(delta):
 	
 	direction = direction.normalized()
 	
+	if not is_on_floor():
+		velocity.y -= gravity * delta
+		if velocity.y > max_gravity:
+			velocity.y = max_gravity
+	
 	if is_on_floor():
 		jumping = false
-	
-	velocity.y -= gravity * delta
-	if velocity.y > max_gravity:
-		velocity.y = max_gravity
 	
 	velocity.x = lerp(velocity.x, direction.x * speed, acceleration * delta)
 	velocity.z = lerp(velocity.z, direction.z * speed, acceleration * delta)
 	
-	var snap = Vector3()
+	var snap = Vector3.ZERO
 	if not jumping:
-		snap = Vector3(0, -1, 0)
+		snap = Vector3.DOWN
 	
 	velocity = move_and_slide_with_snap(velocity, snap, floor_normal, stop_on_slope, max_slides, deg2rad(floor_max_angle))
 	

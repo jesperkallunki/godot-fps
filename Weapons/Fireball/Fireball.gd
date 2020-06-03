@@ -1,6 +1,6 @@
 extends Spatial
 
-export (PackedScene) var projectile
+var projectile = preload("res://Projectiles/Fireball/Fireball.tscn")
 
 export var firing_rate = 2
 export var spread = 4

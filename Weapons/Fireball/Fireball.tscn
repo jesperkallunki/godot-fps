@@ -1,12 +1,13 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://Weapons/Fireball/Fireball.gd" type="Script" id=1]
-[ext_resource path="res://Projectiles/Fireball/Fireball.tscn" type="PackedScene" id=2]
 
 [node name="Fireball" type="Spatial"]
 script = ExtResource( 1 )
-projectile = ExtResource( 2 )
-spread = 0
+__meta__ = {
+"_edit_group_": true
+}
+firing_rate = 1
 
 [node name="AimLocation" type="RayCast" parent="."]
 enabled = true

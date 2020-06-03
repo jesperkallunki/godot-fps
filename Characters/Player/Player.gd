@@ -11,7 +11,7 @@ export var jumping_force = 15
 
 export var gravity = 50
 export var max_gravity = 150
-export var floor_normal = Vector3(0, 1, 0)
+export var floor_normal = Vector3.UP
 export var floor_max_angle = 47
 export var stop_on_slope = true
 export var max_slides = 4
@@ -46,7 +46,7 @@ func _process(delta):
 	if Input.is_key_pressed(KEY_ESCAPE):
 		get_tree().quit()
 	
-	var direction = Vector2();
+	var direction = Vector2()
 	if Input.is_action_pressed("forward"):
 		direction.y -= 1
 	if Input.is_action_pressed("backward"):
@@ -76,16 +76,17 @@ func _process(delta):
 		speed = speed_crouching
 		crouching = true
 	
-	velocity.y -= gravity * delta
-	if velocity.y > max_gravity:
-		velocity.y = max_gravity
+	if not is_on_floor():
+		velocity.y -= gravity * delta
+		if velocity.y > max_gravity:
+			velocity.y = max_gravity
 	
 	velocity.x = lerp(velocity.x, direction.x * speed, acceleration * delta)
 	velocity.z = lerp(velocity.z, direction.y * speed, acceleration * delta)
 	
-	var snap = Vector3()
+	var snap = Vector3.ZERO
 	if not jumping:
-		snap = Vector3(0, -1, 0)
+		snap = Vector3.DOWN
 	
 	velocity = move_and_slide_with_snap(velocity, snap, floor_normal, stop_on_slope, max_slides, deg2rad(floor_max_angle))
 	
