@@ -5,11 +5,26 @@ onready var armor = $Container/Player/Armor/Label
 
 onready var ammo = $Container/Weapon/Ammo/Label
 
+func _ready():
+	pass
+
+func _process(_delta):
+	pass
+
 func update_health(value):
-	health.text = str(value)
+	if value < 0:
+		health.text = str(0)
+	else:
+		health.text = str(value)
 
 func update_armor(value):
-	armor.text = str(value)
+	if value < 0:
+		armor.text = str(0)
+	else:
+		armor.text = str(value)
 
 func update_ammo(value):
-	ammo.text = str(value)
+	if value < 0:
+		ammo.text = str(0)
+	else:
+		ammo.text = str(value)

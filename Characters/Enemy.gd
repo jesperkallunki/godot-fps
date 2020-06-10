@@ -98,8 +98,9 @@ func fight():
 		var intersect_ray = space_state.intersect_ray(global_transform.origin, target.global_transform.origin)
 		if intersect_ray.collider == target:
 			direction = target.global_transform.origin - global_transform.origin
+			look_at(target.global_transform.origin, floor_normal)
 			fov.look_at(target.global_transform.origin, floor_normal)
-			weapon.primary_fire()
+			weapon.primary()
 	else:
 		state = SEARCH
 
@@ -107,7 +108,7 @@ func search():
 	if not searching or is_on_wall():
 		var random_direction = Vector3(rand_range(-999, 999), 0, rand_range(-999, 999))
 		direction = random_direction - global_transform.origin
-		fov.look_at(random_direction, floor_normal)
+		look_at(random_direction, floor_normal)
 		searching = true
 		var random_timer = rand_range(1, 3)
 		yield(get_tree().create_timer(random_timer), "timeout")

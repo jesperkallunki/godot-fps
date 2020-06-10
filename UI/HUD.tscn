@@ -2,7 +2,6 @@
 
 [ext_resource path="res://UI/HUD.gd" type="Script" id=5]
 
-
 [node name="HUD" type="MarginContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -19,13 +18,13 @@ __meta__ = {
 [node name="Container" type="HBoxContainer" parent="."]
 margin_left = 20.0
 margin_top = 20.0
-margin_right = 780.0
-margin_bottom = 580.0
+margin_right = 1250.0
+margin_bottom = 760.0
 
 [node name="Player" type="HBoxContainer" parent="Container"]
-margin_top = 546.0
+margin_top = 726.0
 margin_right = 20.0
-margin_bottom = 560.0
+margin_bottom = 740.0
 size_flags_horizontal = 0
 size_flags_vertical = 8
 custom_constants/separation = 20
@@ -49,10 +48,10 @@ margin_bottom = 14.0
 uppercase = true
 
 [node name="Weapon" type="HBoxContainer" parent="Container"]
-margin_left = 760.0
-margin_top = 546.0
-margin_right = 760.0
-margin_bottom = 560.0
+margin_left = 1230.0
+margin_top = 726.0
+margin_right = 1230.0
+margin_bottom = 740.0
 size_flags_horizontal = 10
 size_flags_vertical = 8
 custom_constants/separation = 20

@@ -1,6 +1,6 @@
 extends Spatial
 
-var projectile = preload("res://Projectiles/Fireball/Fireball.tscn")
+var projectile = preload("res://Projectiles/Fireball.tscn")
 
 export var firing_rate = 2
 export var spread = 4
@@ -18,7 +18,7 @@ func _process(_delta):
 	aim_location.force_raycast_update()
 	firing_location.look_at(aim_location.get_collision_point(), Vector3(0, 1, 0))
 
-func primary_fire():
+func primary():
 	if not firing:
 		firing_location.add_child(projectile.instance())
 		firing = true

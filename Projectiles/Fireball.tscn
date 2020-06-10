@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Projectiles/Fireball.gd" type="Script" id=1]
+
+[sub_resource type="SphereShape" id=1]
+radius = 0.25
+
+[sub_resource type="SpatialMaterial" id=2]
+params_billboard_mode = 2
+albedo_color = Color( 0.913725, 0.0352941, 0.0352941, 1 )
+
+[sub_resource type="QuadMesh" id=3]
+material = SubResource( 2 )
+size = Vector2( 0.5, 0.5 )
+
+[sub_resource type="BoxShape" id=4]
+extents = Vector3( 0.25, 0.25, 0.25 )
+
+[node name="Fireball" type="RigidBody"]
+collision_layer = 0
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+speed = 40
+
+[node name="Collision" type="CollisionShape" parent="."]
+shape = SubResource( 1 )
+
+[node name="Mesh" type="MeshInstance" parent="."]
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="Impact" type="Area" parent="."]
+collision_layer = 8
+collision_mask = 1025
+
+[node name="Collision" type="CollisionShape" parent="Impact"]
+shape = SubResource( 4 )
+[connection signal="area_entered" from="Impact" to="." method="_on_Impact_area_entered"]

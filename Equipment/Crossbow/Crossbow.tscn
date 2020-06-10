@@ -1,18 +1,19 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://Weapons/Fireball/Fireball.gd" type="Script" id=1]
+[ext_resource path="res://Equipment/Crossbow/Crossbow.gd" type="Script" id=1]
 
-[node name="Fireball" type="Spatial"]
+[node name="Crossbow" type="Spatial"]
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
-firing_rate = 1
 
 [node name="AimLocation" type="RayCast" parent="."]
 enabled = true
 cast_to = Vector3( 0, 0, 0 )
-collision_mask = 1027
+collision_mask = 1026
+collide_with_areas = true
+collide_with_bodies = false
 
 [node name="FiringLocation" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0 )

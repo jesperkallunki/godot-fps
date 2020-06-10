@@ -1,19 +1,17 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Characters/Enemy.gd" type="Script" id=1]
-[ext_resource path="res://Weapons/Fireball/Fireball.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Equipment/Fireball/Fireball.tscn" type="PackedScene" id=2]
 
 [sub_resource type="CapsuleShape" id=1]
-radius = 0.5
-height = 2.0
+radius = 0.75
+height = 1.5
 
 [sub_resource type="BoxShape" id=2]
-extents = Vector3( 0.5, 1.5, 0.5 )
+extents = Vector3( 0.5, 0.001, 0.5 )
 
-[sub_resource type="PrismMesh" id=3]
-
-[sub_resource type="SpatialMaterial" id=4]
-albedo_color = Color( 0.976471, 0.0156863, 0.0156863, 1 )
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 0.75, 1.5, 0.75 )
 
 [node name="Enemy" type="KinematicBody" groups=[
 "Enemy",
@@ -24,12 +22,16 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
-acceleration = 5
-speed = 5
+acceleration = 7
+speed = 7
 
 [node name="Collision" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
 shape = SubResource( 1 )
+
+[node name="CollisionFeet" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0 )
+shape = SubResource( 2 )
 
 [node name="Hitbox" type="Area" parent="." groups=[
 "Hitbox",
@@ -38,18 +40,13 @@ collision_layer = 2
 collision_mask = 1027
 
 [node name="Collision" type="CollisionShape" parent="Hitbox"]
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="FOV" type="Area" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, -0.5 )
 collision_layer = 0
 collision_mask = 1025
 
 [node name="Fireball" parent="FOV" instance=ExtResource( 2 )]
-
-[node name="MeshInstance" type="MeshInstance" parent="FOV"]
-transform = Transform( -0.25, -9.73536e-08, 4.25546e-15, 0, -1.09278e-08, -0.25, 9.73536e-08, -0.25, 1.09278e-08, 0, 0, 0 )
-mesh = SubResource( 3 )
-material/0 = SubResource( 4 )
 [connection signal="area_entered" from="FOV" to="." method="_on_FOV_area_entered"]
 [connection signal="area_exited" from="FOV" to="." method="_on_FOV_area_exited"]

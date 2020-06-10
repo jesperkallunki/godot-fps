@@ -1,7 +1,9 @@
 extends KinematicBody
 
 export var health = 100
+export var max_health = 100
 export var armor = 0
+export var max_armor = 100
 
 export var acceleration = 10
 export var speed_running = 10
@@ -27,20 +29,11 @@ var crouching = false
 
 onready var camera = $Camera
 
-var weapon
-
-onready var pistol = $Camera/Pistol
-onready var shotgun = $Camera/Shotgun
-onready var crossbow = $Camera/Crossbow
-
-onready var hud = $Camera/HUD
+var equipment
+var slot0
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	
-	weapon = pistol
-	shotgun.set_process(false)
-	crossbow.set_process(false)
 
 func _process(delta):
 	if Input.is_key_pressed(KEY_ESCAPE):
@@ -90,25 +83,16 @@ func _process(delta):
 	
 	velocity = move_and_slide_with_snap(velocity, snap, floor_normal, stop_on_slope, max_slides, deg2rad(floor_max_angle))
 	
-	if Input.is_action_pressed("primary_fire"):
-		weapon.primary_fire()
+	if equipment:
+		if Input.is_action_pressed("primary"):
+			equipment.primary()
+		if Input.is_action_pressed("secondary"):
+			equipment.secondary()
 	
-	if Input.is_action_pressed("weapon0") and weapon != pistol and pistol.available == true:
-		weapon.unequip(speed_weapon_switch)
-		pistol.equip(speed_weapon_switch)
-		weapon = pistol
-	if Input.is_action_pressed("weapon1") and weapon != shotgun and shotgun.available == true:
-		weapon.unequip(speed_weapon_switch)
-		shotgun.equip(speed_weapon_switch)
-		weapon = shotgun
-	if Input.is_action_pressed("weapon2") and weapon != crossbow and crossbow.available == true:
-		weapon.unequip(speed_weapon_switch)
-		crossbow.equip(speed_weapon_switch)
-		weapon = crossbow
-	
-	hud.update_health(health)
-	hud.update_armor(armor)
-	hud.update_ammo(weapon.ammo)
+	if Input.is_action_pressed("slot0") and equipment != slot0 and slot0.available == true:
+		equipment.unequip(speed_weapon_switch)
+		slot0.equip(speed_weapon_switch)
+		equipment = slot0
 
 func _input(event):
 	if event is InputEventMouseMotion:
