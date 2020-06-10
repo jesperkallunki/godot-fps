@@ -1,10 +1,10 @@
 extends Spatial
 
 export var damage = 40
-export var firing_range = 100
+export var firing_range = 2
 export var firing_rate = 0.5
-export var ammo = 60
-export var max_ammo = 60
+export var ammo = INF
+export var max_ammo = INF
 export var available = false
 
 var firing = false

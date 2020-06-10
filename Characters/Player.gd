@@ -6,10 +6,10 @@ export var armor = 0
 export var max_armor = 100
 
 export var acceleration = 10
-export var speed_running = 10
-export var speed_sprinting = 15
-export var speed_crouching = 5
-export var jumping_force = 15
+export var run_speed = 10
+export var sprint_speed = 15
+export var crouch_speed = 5
+export var jump_force = 15
 
 export var gravity = 50
 export var max_gravity = 150
@@ -19,7 +19,7 @@ export var stop_on_slope = true
 export var max_slides = 4
 export var sensitivity = 0.1
 
-export var speed_weapon_switch = 1
+export var equip_speed = 1
 
 var velocity = Vector3()
 
@@ -28,9 +28,10 @@ var sprinting = false
 var crouching = false
 
 onready var camera = $Camera
+onready var hud = $Camera/HUD
 
 var equipment
-var slot0
+onready var slot0 = $Camera/Mace
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -38,6 +39,8 @@ func _ready():
 func _process(delta):
 	if Input.is_key_pressed(KEY_ESCAPE):
 		get_tree().quit()
+	
+	equipment = slot0
 	
 	var direction = Vector2()
 	if Input.is_action_pressed("forward"):
@@ -51,22 +54,22 @@ func _process(delta):
 	
 	direction = direction.normalized().rotated(-rotation.y)
 	
-	var speed = speed_running
+	var speed = run_speed
 	
 	sprinting = false
 	if Input.is_action_pressed("sprint"):
-		speed = speed_sprinting
+		speed = sprint_speed
 		sprinting = true
 	
 	if is_on_floor():
 		jumping = false
 		if Input.is_action_pressed("jump"):
-			velocity.y = jumping_force
+			velocity.y = jump_force
 			jumping = true
 	
 	crouching = false
 	if Input.is_action_pressed("crouch") and not (sprinting or jumping):
-		speed = speed_crouching
+		speed = crouch_speed
 		crouching = true
 	
 	if not is_on_floor():
@@ -90,9 +93,13 @@ func _process(delta):
 			equipment.secondary()
 	
 	if Input.is_action_pressed("slot0") and equipment != slot0 and slot0.available == true:
-		equipment.unequip(speed_weapon_switch)
-		slot0.equip(speed_weapon_switch)
+		equipment.unequip(equip_speed)
+		slot0.equip(equip_speed)
 		equipment = slot0
+	
+	hud.update_health(health)
+	hud.update_armor(armor)
+	hud.update_ammo(equipment.ammo)
 
 func _input(event):
 	if event is InputEventMouseMotion:
