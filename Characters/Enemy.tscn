@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Characters/Enemy/Enemy.gd" type="Script" id=1]
+[ext_resource path="res://Characters/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://Weapons/Fireball/Fireball.tscn" type="PackedScene" id=2]
 
 [sub_resource type="CapsuleShape" id=1]
@@ -45,14 +45,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0 )
 collision_layer = 0
 collision_mask = 1025
 
-[node name="Collision" type="CollisionPolygon" parent="FOV"]
-transform = Transform( -1.62921e-07, 1, -4.88762e-07, 0, -1.62921e-07, -3, -1, -1.62921e-07, 7.96295e-14, 0, -1.25, 0 )
-polygon = PoolVector2Array( 0, 0, 50, 50, 50, -50 )
-
 [node name="Fireball" parent="FOV" instance=ExtResource( 2 )]
 
 [node name="MeshInstance" type="MeshInstance" parent="FOV"]
-transform = Transform( -1.5, -1.16824e-06, 1.70218e-14, 0, -1.31134e-07, -1, 5.84122e-07, -3, 4.37114e-08, 0, 0, -1 )
+transform = Transform( -0.25, -9.73536e-08, 4.25546e-15, 0, -1.09278e-08, -0.25, 9.73536e-08, -0.25, 1.09278e-08, 0, 0, 0 )
 mesh = SubResource( 3 )
 material/0 = SubResource( 4 )
 [connection signal="area_entered" from="FOV" to="." method="_on_FOV_area_entered"]

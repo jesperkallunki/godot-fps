@@ -34,7 +34,6 @@ extents = Vector3( 1, 0.001, 1 )
 extents = Vector3( 1, 0.001, 1 )
 
 [node name="Skybox" type="StaticBody"]
-transform = Transform( 999999, 0, 0, 0, 999999, 0, 0, 0, 999999, 0, 0, 0 )
 collision_layer = 1024
 collision_mask = 0
 __meta__ = {

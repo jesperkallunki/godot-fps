@@ -1,437 +1,56 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Characters/Player/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Pickups/ArmorMedium/ArmorMedium.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Pickups/HealthMedium/HealthMedium.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Characters/Enemy/Enemy.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Pickups/Crossbow/Crossbow.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Environment/Skybox/Skybox.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Pickups/Shotgun/Shotgun.tscn" type="PackedScene" id=7]
-
-[sub_resource type="BoxShape" id=1]
-extents = Vector3( 50, 0.001, 50 )
-
-[sub_resource type="PlaneMesh" id=2]
-
-[sub_resource type="BoxShape" id=3]
-extents = Vector3( 50, 0.001, 50 )
-
-[sub_resource type="BoxShape" id=4]
-extents = Vector3( 7, 6, 1 )
-
-[sub_resource type="BoxShape" id=5]
-extents = Vector3( 7, 6, 1 )
+[ext_resource path="res://Environment/Skybox.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Characters/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Environment/FloorGrass.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Environment/WallStone.tscn" type="PackedScene" id=4]
 
 [node name="Map0" type="Spatial"]
+__meta__ = {
+"_edit_group_": true
+}
 
-[node name="Skybox" parent="." instance=ExtResource( 6 )]
+[node name="Skybox" parent="." instance=ExtResource( 1 )]
+transform = Transform( 100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0 )
 
-[node name="StaticBody" type="StaticBody" parent="."]
-collision_layer = 1024
-collision_mask = 0
+[node name="Player" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
 
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
-shape = SubResource( 1 )
+[node name="FloorGrass" parent="." instance=ExtResource( 3 )]
+transform = Transform( 10, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0 )
 
-[node name="MeshInstance" type="MeshInstance" parent="StaticBody"]
-transform = Transform( 50, 0, 0, 0, 1, 0, 0, 0, 50, 0, 0, 0 )
-mesh = SubResource( 2 )
-material/0 = null
+[node name="WallStone" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 1, 7 )
 
-[node name="Area" type="Area" parent="StaticBody"]
-collision_layer = 1024
-collision_mask = 0
+[node name="WallStone2" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 1, 9 )
 
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody/Area"]
-shape = SubResource( 3 )
+[node name="WallStone8" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 1, -9 )
 
-[node name="StaticBody24" type="StaticBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 100 )
-collision_layer = 1024
-collision_mask = 0
+[node name="WallStone7" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 1, -7 )
 
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody24"]
-shape = SubResource( 1 )
+[node name="WallStone10" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 1, -5 )
 
-[node name="MeshInstance" type="MeshInstance" parent="StaticBody24"]
-transform = Transform( 50, 0, 0, 0, 1, 0, 0, 0, 50, 0, 0, 0 )
-mesh = SubResource( 2 )
-material/0 = null
+[node name="WallStone9" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 1, -3 )
 
-[node name="Area" type="Area" parent="StaticBody24"]
-collision_layer = 1024
-collision_mask = 0
+[node name="WallStone12" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 3, -5 )
 
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody24/Area"]
-shape = SubResource( 3 )
+[node name="WallStone11" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 3, -3 )
 
-[node name="Player" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 2, 4 )
+[node name="WallStone4" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 1, 3 )
 
-[node name="MedKit" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 1, 0 )
+[node name="WallStone3" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 1, 5 )
 
-[node name="MedKit2" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, 0 )
+[node name="WallStone6" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 3, 3 )
 
-[node name="MedKit3" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 1, 0 )
-
-[node name="Armor" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, -2 )
-
-[node name="Armor2" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 1, -2 )
-
-[node name="Armor3" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 1, -2 )
-
-[node name="Crossbow" parent="." instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, -4 )
-
-[node name="Enemy" parent="." instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 9, 15 )
-
-[node name="Enemy2" parent="." instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 9, 17 )
-
-[node name="Enemy3" parent="." instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 9, 17 )
-
-[node name="Shotgun" parent="." instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 1, 0 )
-
-[node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 84, 0 )
-keep_aspect = 0
-fov = 90.0
-
-[node name="StaticBody2" type="StaticBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 6 )
-collision_layer = 1024
-collision_mask = 0
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody2"]
-shape = SubResource( 4 )
-
-[node name="Area" type="Area" parent="StaticBody2"]
-collision_layer = 1024
-collision_mask = 0
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody2/Area"]
-shape = SubResource( 5 )
-
-[node name="StaticBody8" type="StaticBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -43, 0, -49 )
-collision_layer = 1024
-collision_mask = 0
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody8"]
-shape = SubResource( 4 )
-
-[node name="Area" type="Area" parent="StaticBody8"]
-collision_layer = 1024
-collision_mask = 0
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody8/Area"]
-shape = SubResource( 5 )
-
-[node name="StaticBody10" type="StaticBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -21, 0, -25 )
-collision_layer = 1024
-collision_mask = 0
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody10"]
-shape = SubResource( 4 )
-
-[node name="Area" type="Area" parent="StaticBody10"]
-collision_layer = 1024
-collision_mask = 0
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody10/Area"]
-shape = SubResource( 5 )
-
-[node name="StaticBody11" type="StaticBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 7.07107, -0.707107, 0, 7.07107, 0.707107, -27, 0, 19 )
-collision_layer = 1024
-collision_mask = 0
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody11"]
-shape = SubResource( 4 )
-
-[node name="Area" type="Area" parent="StaticBody11"]
-collision_layer = 1024
-collision_mask = 0
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody11/Area"]
-shape = SubResource( 5 )
-
-[node name="StaticBody23" type="StaticBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 9.84808, -0.173648, 0, 1.73648, 0.984808, -27, 0, 33 )
-collision_layer = 1024
-collision_mask = 0
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody23"]
-shape = SubResource( 4 )
-
-[node name="Area" type="Area" parent="StaticBody23"]
-collision_layer = 1024
-collision_mask = 0
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody23/Area"]
-shape = SubResource( 5 )
-
-[node name="StaticBody9" type="StaticBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -29, 0, -49 )
-collision_layer = 1024
-collision_mask = 0
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody9"]
-shape = SubResource( 4 )
-
-[node name="Area" type="Area" parent="StaticBody9"]
-collision_layer = 1024
-collision_mask = 0
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody9/Area"]
-shape = SubResource( 5 )
-
-[node name="StaticBody12" type="StaticBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -49 )
-collision_layer = 1024
-collision_mask = 0
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody12"]
-shape = SubResource( 4 )
-
-[node name="Area" type="Area" parent="StaticBody12"]
-collision_layer = 1024
-collision_mask = 0
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody12/Area"]
-shape = SubResource( 5 )
-
-[node name="StaticBody14" type="StaticBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -49 )
-collision_layer = 1024
-collision_mask = 0
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody14"]
-shape = SubResource( 4 )
-
-[node name="Area" type="Area" parent="StaticBody14"]
-collision_layer = 1024
-collision_mask = 0
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody14/Area"]
-shape = SubResource( 5 )
-
-[node name="StaticBody13" type="StaticBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, -49 )
-collision_layer = 1024
-collision_mask = 0
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody13"]
-shape = SubResource( 4 )
-
-[node name="Area" type="Area" parent="StaticBody13"]
-collision_layer = 1024
-collision_mask = 0
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody13/Area"]
-shape = SubResource( 5 )
-
-[node name="StaticBody16" type="StaticBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27, 0, -49 )
-collision_layer = 1024
-collision_mask = 0
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody16"]
-shape = SubResource( 4 )
-
-[node name="Area" type="Area" parent="StaticBody16"]
-collision_layer = 1024
-collision_mask = 0
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody16/Area"]
-shape = SubResource( 5 )
-
-[node name="StaticBody15" type="StaticBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 41, 0, -49 )
-collision_layer = 1024
-collision_mask = 0
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody15"]
-shape = SubResource( 4 )
-
-[node name="Area" type="Area" parent="StaticBody15"]
-collision_layer = 1024
-collision_mask = 0
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody15/Area"]
-shape = SubResource( 5 )
-
-[node name="StaticBody3" type="StaticBody" parent="."]
-transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, -2, 0, -2 )
-collision_layer = 1024
-collision_mask = 0
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody3"]
-shape = SubResource( 4 )
-
-[node name="Area" type="Area" parent="StaticBody3"]
-collision_layer = 1024
-collision_mask = 0
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody3/Area"]
-shape = SubResource( 5 )
-
-[node name="StaticBody17" type="StaticBody" parent="."]
-transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 48, 0, -42 )
-collision_layer = 1024
-collision_mask = 0
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody17"]
-shape = SubResource( 4 )
-
-[node name="Area" type="Area" parent="StaticBody17"]
-collision_layer = 1024
-collision_mask = 0
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody17/Area"]
-shape = SubResource( 5 )
-
-[node name="StaticBody18" type="StaticBody" parent="."]
-transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 48, 0, -28 )
-collision_layer = 1024
-collision_mask = 0
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody18"]
-shape = SubResource( 4 )
-
-[node name="Area" type="Area" parent="StaticBody18"]
-collision_layer = 1024
-collision_mask = 0
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody18/Area"]
-shape = SubResource( 5 )
-
-[node name="StaticBody20" type="StaticBody" parent="."]
-transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 48, -3, -19 )
-collision_layer = 1024
-collision_mask = 0
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody20"]
-shape = SubResource( 4 )
-
-[node name="Area" type="Area" parent="StaticBody20"]
-collision_layer = 1024
-collision_mask = 0
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody20/Area"]
-shape = SubResource( 5 )
-
-[node name="StaticBody19" type="StaticBody" parent="."]
-transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 48, -3, -5 )
-collision_layer = 1024
-collision_mask = 0
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody19"]
-shape = SubResource( 4 )
-
-[node name="Area" type="Area" parent="StaticBody19"]
-collision_layer = 1024
-collision_mask = 0
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody19/Area"]
-shape = SubResource( 5 )
-
-[node name="StaticBody22" type="StaticBody" parent="."]
-transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 48, -3, 3 )
-collision_layer = 1024
-collision_mask = 0
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody22"]
-shape = SubResource( 4 )
-
-[node name="Area" type="Area" parent="StaticBody22"]
-collision_layer = 1024
-collision_mask = 0
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody22/Area"]
-shape = SubResource( 5 )
-
-[node name="StaticBody21" type="StaticBody" parent="."]
-transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 48, -3, 17 )
-collision_layer = 1024
-collision_mask = 0
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody21"]
-shape = SubResource( 4 )
-
-[node name="Area" type="Area" parent="StaticBody21"]
-collision_layer = 1024
-collision_mask = 0
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody21/Area"]
-shape = SubResource( 5 )
-
-[node name="StaticBody4" type="StaticBody" parent="."]
-transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, -39, 0, -2 )
-collision_layer = 1024
-collision_mask = 0
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody4"]
-shape = SubResource( 4 )
-
-[node name="Area" type="Area" parent="StaticBody4"]
-collision_layer = 1024
-collision_mask = 0
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody4/Area"]
-shape = SubResource( 5 )
-
-[node name="StaticBody5" type="StaticBody" parent="."]
-transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, -39, 0, -19 )
-collision_layer = 1024
-collision_mask = 0
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody5"]
-shape = SubResource( 4 )
-
-[node name="Area" type="Area" parent="StaticBody5"]
-collision_layer = 1024
-collision_mask = 0
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody5/Area"]
-shape = SubResource( 5 )
-
-[node name="StaticBody6" type="StaticBody" parent="."]
-transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, -39, 0, -36 )
-collision_layer = 1024
-collision_mask = 0
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody6"]
-shape = SubResource( 4 )
-
-[node name="Area" type="Area" parent="StaticBody6"]
-collision_layer = 1024
-collision_mask = 0
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody6/Area"]
-shape = SubResource( 5 )
-
-[node name="StaticBody7" type="StaticBody" parent="."]
-transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, -39, 0, -43 )
-collision_layer = 1024
-collision_mask = 0
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody7"]
-shape = SubResource( 4 )
-
-[node name="Area" type="Area" parent="StaticBody7"]
-collision_layer = 1024
-collision_mask = 0
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody7/Area"]
-shape = SubResource( 5 )
+[node name="WallStone5" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 3, 5 )

@@ -37,6 +37,19 @@ var state = SLEEP
 
 var target
 
+func _ready():
+	var shape = CylinderMesh.new()
+	shape.bottom_radius = 0
+	shape.top_radius = 50
+	shape.height = 70
+	
+	var collision = CollisionShape.new()
+	collision.set_shape(shape.create_convex_shape())
+	collision.rotate_object_local(Vector3(-1, 0, 0), float(deg2rad(90)))
+	collision.translate_object_local(Vector3(0, 35, 0))
+	
+	fov.add_child(collision)
+
 func _process(delta):
 	
 	match state:
@@ -80,12 +93,13 @@ func sleep():
 		state = SEARCH
 
 func fight():
-	var space_state = get_world().direct_space_state
-	var intersect_ray = space_state.intersect_ray(global_transform.origin, target.global_transform.origin)
-	if intersect_ray.collider == target:
-		direction = target.global_transform.origin - global_transform.origin
-		fov.look_at(target.global_transform.origin, floor_normal)
-		weapon.primary_fire()
+	if target:
+		var space_state = get_world().direct_space_state
+		var intersect_ray = space_state.intersect_ray(global_transform.origin, target.global_transform.origin)
+		if intersect_ray.collider == target:
+			direction = target.global_transform.origin - global_transform.origin
+			fov.look_at(target.global_transform.origin, floor_normal)
+			weapon.primary_fire()
 	else:
 		state = SEARCH
 
@@ -103,7 +117,6 @@ func _on_FOV_area_entered(area):
 	var parent = area.get_parent()
 	if parent.is_in_group("Player"):
 		target = parent
-
 
 func _on_FOV_area_exited(area):
 	var parent = area.get_parent()
