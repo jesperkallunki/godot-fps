@@ -7,6 +7,7 @@ export var ammo = 100
 export var max_ammo = 100
 export var pellets = 16
 export var spread = 8
+export var available = false
 
 var firing = false
 var equipping = false
@@ -14,10 +15,11 @@ var unequipping = false
 
 onready var aim_location = $AimLocation
 
-export var available = false
-
 func _ready():
 	aim_location.cast_to = Vector3(0, 0, -firing_range)
+	
+	set_process(false)
+	visible = false
 
 func _process(_delta):
 	aim_location.force_raycast_update()

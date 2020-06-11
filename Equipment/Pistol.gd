@@ -1,8 +1,8 @@
 extends Spatial
 
 export var damage = 40
-export var firing_range = 100
-export var firing_rate = 0.5
+export var fire_range = 100
+export var fire_rate = 0.5
 export var ammo = 60
 export var max_ammo = 60
 export var available = false
@@ -14,17 +14,20 @@ var unequipping = false
 onready var aim_location = $AimLocation
 
 func _ready():
-	aim_location.cast_to = Vector3(0, 0, -firing_range)
+	aim_location.cast_to = Vector3(0, 0, -fire_range)
+	
+	set_process(false)
+	visible = false
 
 func _process(_delta):
 	aim_location.force_raycast_update()
 
 func primary():
-	if not (firing or equipping or unequipping) and ammo > 0:
+	if not firing and ammo > 0:
 		ammo -= 1
 		check_collision()
 		firing = true
-		yield(get_tree().create_timer(firing_rate), "timeout")
+		yield(get_tree().create_timer(fire_rate), "timeout")
 		firing = false
 
 func secondary():
@@ -36,19 +39,3 @@ func check_collision():
 		if area.is_in_group("Hitbox"):
 			var parent = area.get_parent()
 			parent.health -= damage
-
-func equip(value):
-	if not (firing or equipping or unequipping):
-		equipping = true
-		yield(get_tree().create_timer(value), "timeout")
-		visible = true
-		set_process(true)
-		equipping = false
-
-func unequip(value):
-	if not (firing or equipping or unequipping):
-		unequipping = true
-		yield(get_tree().create_timer(value), "timeout")
-		visible = false
-		set_process(false)
-		unequipping = false

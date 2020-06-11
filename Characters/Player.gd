@@ -18,7 +18,6 @@ export var floor_max_angle = 47
 export var stop_on_slope = true
 export var max_slides = 4
 export var sensitivity = 0.1
-
 export var equip_speed = 1
 
 var velocity = Vector3()
@@ -30,17 +29,23 @@ var crouching = false
 onready var camera = $Camera
 onready var hud = $Camera/HUD
 
-var equipment
 onready var slot0 = $Camera/Mace
+onready var slot1 = $Camera/Pistol
+onready var slot2 = $Camera/Shotgun
+
+var equipment
+
+var equipping = false
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	
+	slot0.available = true
+	equip(slot0)
 
 func _process(delta):
 	if Input.is_key_pressed(KEY_ESCAPE):
 		get_tree().quit()
-	
-	equipment = slot0
 	
 	var direction = Vector2()
 	if Input.is_action_pressed("forward"):
@@ -86,20 +91,22 @@ func _process(delta):
 	
 	velocity = move_and_slide_with_snap(velocity, snap, floor_normal, stop_on_slope, max_slides, deg2rad(floor_max_angle))
 	
-	if equipment:
-		if Input.is_action_pressed("primary"):
-			equipment.primary()
-		if Input.is_action_pressed("secondary"):
-			equipment.secondary()
+	if Input.is_action_pressed("primary") and not equipping:
+		equipment.primary()
+	if Input.is_action_pressed("secondary") and not equipping:
+		equipment.secondary()
 	
-	if Input.is_action_pressed("slot0") and equipment != slot0 and slot0.available == true:
-		equipment.unequip(equip_speed)
-		slot0.equip(equip_speed)
-		equipment = slot0
+	if Input.is_action_pressed("slot0"):
+		equip(slot0)
+	if Input.is_action_pressed("slot1"):
+		equip(slot1)
+	if Input.is_action_pressed("slot2"):
+		equip(slot2)
 	
 	hud.update_health(health)
 	hud.update_armor(armor)
-	hud.update_ammo(equipment.ammo)
+	if equipment:
+		hud.update_ammo(equipment.ammo)
 
 func _input(event):
 	if event is InputEventMouseMotion:
@@ -107,3 +114,15 @@ func _input(event):
 		camera.rotation.x += -deg2rad(mouse_position.y * sensitivity)
 		camera.rotation.x = clamp(camera.rotation.x, deg2rad(-90), deg2rad(90))
 		rotation.y += -deg2rad(mouse_position.x * sensitivity)
+
+func equip(slot):
+	if not equipping and equipment != slot and slot.available == true:
+		if equipment:
+			equipment.set_process(false)
+			equipment.visible = false
+		equipping = true
+		yield(get_tree().create_timer(equip_speed), "timeout")
+		equipment = slot
+		equipment.set_process(true)
+		equipment.visible = true
+		equipping = false

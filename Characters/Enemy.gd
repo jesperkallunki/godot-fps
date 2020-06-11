@@ -99,7 +99,6 @@ func fight():
 		if intersect_ray.collider == target:
 			direction = target.global_transform.origin - global_transform.origin
 			look_at(target.global_transform.origin, floor_normal)
-			fov.look_at(target.global_transform.origin, floor_normal)
 			weapon.primary()
 	else:
 		state = SEARCH

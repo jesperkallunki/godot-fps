@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Environment/Skybox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Characters/Player.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Environment/FloorGrass.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Pickups/ArmorMedium.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Pickups/HealthMedium.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Pickups/Pistol.tscn" type="PackedScene" id=8]
 
 [node name="Map0" type="Spatial"]
 __meta__ = {
@@ -17,7 +18,7 @@ __meta__ = {
 transform = Transform( 100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 5 )
 
 [node name="FloorGrass" parent="." instance=ExtResource( 5 )]
 transform = Transform( 10, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0 )
@@ -119,7 +120,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 3, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 3, 2 )
 
 [node name="Enemy" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 2, 1 )
+transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, -9, 2, 1 )
 
 [node name="ArmorMedium" parent="." instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -9 )
@@ -150,3 +151,6 @@ transform = Transform( -0.819152, 0, 0.573576, 0, 1, 0, -0.573576, 0, -0.819152,
 keep_aspect = 0
 current = true
 fov = 90.0
+
+[node name="Pistol" parent="." instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -5 )
