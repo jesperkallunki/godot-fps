@@ -20,6 +20,7 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
+armor_restore = 50
 
 [node name="Collision" type="CollisionShape" parent="."]
 shape = SubResource( 1 )

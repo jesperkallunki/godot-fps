@@ -24,6 +24,12 @@ script = ExtResource( 5 )
 __meta__ = {
 "_edit_group_": true
 }
+health = 100
+acceleration = 10
+run_speed = 10
+sprint_speed = 15
+crouch_speed = 5
+jump_force = 15
 
 [node name="Collision" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )

@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Characters/Enemy.gd" type="Script" id=1]
-[ext_resource path="res://Equipment/Fireball/Fireball.tscn" type="PackedScene" id=2]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.75
@@ -46,7 +45,5 @@ shape = SubResource( 3 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, -0.5 )
 collision_layer = 0
 collision_mask = 1025
-
-[node name="Fireball" parent="FOV" instance=ExtResource( 2 )]
 [connection signal="area_entered" from="FOV" to="." method="_on_FOV_area_entered"]
 [connection signal="area_exited" from="FOV" to="." method="_on_FOV_area_exited"]

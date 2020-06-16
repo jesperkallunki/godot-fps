@@ -1,15 +1,13 @@
 extends KinematicBody
 
-export var health = 100
-export var max_health = 100
-export var armor = 0
-export var max_armor = 100
+export var health: int
+export var armor: int
 
-export var acceleration = 10
-export var run_speed = 10
-export var sprint_speed = 15
-export var crouch_speed = 5
-export var jump_force = 15
+export var acceleration: int
+export var run_speed: int
+export var sprint_speed: int
+export var crouch_speed: int
+export var jump_force: int
 
 export var gravity = 50
 export var max_gravity = 150
