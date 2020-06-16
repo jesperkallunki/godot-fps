@@ -1,23 +1,21 @@
 extends Spatial
 
 export var damage = 40
-export var fire_range = 100
+export var fire_range = 70
 export var fire_rate = 0.5
 export var ammo = 60
 export var max_ammo = 60
 export var available = false
 
 var firing = false
-var equipping = false
-var unequipping = false
 
 onready var aim_location = $AimLocation
 
 func _ready():
 	aim_location.cast_to = Vector3(0, 0, -fire_range)
 	
-	set_process(false)
 	visible = false
+	set_process(false)
 
 func _process(_delta):
 	aim_location.force_raycast_update()
@@ -38,4 +36,4 @@ func check_collision():
 		var area = aim_location.get_collider()
 		if area.is_in_group("Hitbox"):
 			var parent = area.get_parent()
-			parent.health -= damage
+			parent.take_damage(damage)

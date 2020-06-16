@@ -10,5 +10,5 @@ func _ready():
 func _on_Impact_area_entered(area):
 	if area.is_in_group("Hitbox"):
 		var parent = area.get_parent()
-		parent.health -= damage
+		parent.take_damage(damage)
 	queue_free()

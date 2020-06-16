@@ -28,7 +28,6 @@ var crouching = false
 
 onready var camera = $Camera
 onready var hud = $Camera/HUD
-
 onready var slot0 = $Camera/Mace
 onready var slot1 = $Camera/Pistol
 onready var slot2 = $Camera/Shotgun
@@ -103,6 +102,9 @@ func _process(delta):
 	if Input.is_action_pressed("slot2"):
 		equip(slot2)
 	
+	if health <= 0:
+		die()
+	
 	hud.update_health(health)
 	hud.update_armor(armor)
 	if equipment:
@@ -118,11 +120,23 @@ func _input(event):
 func equip(slot):
 	if not equipping and equipment != slot and slot.available == true:
 		if equipment:
-			equipment.set_process(false)
 			equipment.visible = false
+			equipment.set_process(false)
 		equipping = true
 		yield(get_tree().create_timer(equip_speed), "timeout")
 		equipment = slot
 		equipment.set_process(true)
 		equipment.visible = true
 		equipping = false
+
+func take_damage(value):
+	if armor > 0:
+		var armor_damage = 0.25 * value
+		var health_damage = 0.75 * value
+		armor -= armor_damage
+		health -= health_damage
+	else:
+		health -= value
+
+func die():
+	print("rip")

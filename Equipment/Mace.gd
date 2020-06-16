@@ -14,8 +14,8 @@ onready var aim_location = $AimLocation
 func _ready():
 	aim_location.cast_to = Vector3(0, 0, -fire_range)
 	
-	set_process(false)
 	visible = false
+	set_process(false)
 
 func _process(_delta):
 	aim_location.force_raycast_update()
@@ -36,4 +36,4 @@ func check_collision():
 		var area = aim_location.get_collider()
 		if area.is_in_group("Hitbox"):
 			var parent = area.get_parent()
-			parent.health -= damage
+			parent.take_damage(damage)
